@@ -1,2 +1,2 @@
-# word-hoard
-### a Sails application
+Word-hoard
+==========
