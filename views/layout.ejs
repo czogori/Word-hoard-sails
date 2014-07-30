@@ -18,7 +18,7 @@
 
       You can link any CSS, LESS, or image files in your `assets` directory
       as you would normally: using <link/> tags.
-      
+
     -->
 
     <!--
@@ -30,9 +30,14 @@
       located in the top-level of this Sails app.  If you run into issues with styles
       not reloading, check the Sails log output in your console for LESS compilation errors.
       If necessary, shut down and then lift your app again.
-      
+
     -->
 
+    <link rel="stylesheet" href="/linker/styles/bootstrap.css">
+    <link rel="stylesheet" href="/linker/styles/font-awesome.min.css">
+    <link rel="stylesheet" href="/linker/styles/main.css">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
   </head>
 
   <body>
@@ -46,7 +51,7 @@
       Client-side Javascript
       ========================
 
-      You can import any js files in your `assets` directory as you would 
+      You can import any js files in your `assets` directory as you would
       normally: using <script></script> tags.
 
       Here's an example of importing a few dependencies, in order:
@@ -58,9 +63,14 @@
     <!-- listen on socket.io for incoming messages -->
     <script type="text/javascript" src="/js/app.js"></script>
 
+
+    <script type="text/javascript" src="/linker/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/linker/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/linker/js/smoothscroll.js"></script>
     <!-- Your scripts here? -->
     <!-- Your scripts here? -->
     <!-- Your scripts here? -->
+    <script type="text/javascript" src="/linker/js/main.js"></script>
 
 
     <!--
@@ -82,7 +92,7 @@
       Another way: The Asset Linker
       ========================
 
-      Sails supports a Grunt-based asset linker, to automatically inject 
+      Sails supports a Grunt-based asset linker, to automatically inject
       <link> and <script> tags, as well any client-side templates you're using
       into your HTML layouts and views, respecting dependencies.
 
