@@ -3,7 +3,7 @@
     <i class="icon-remove menu-close"></i>
      <form role="form">
         <div class="form-group">
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nowe słowo">
+            <input type="text" class="form-control" id="new-word" placeholder="Nowe słowo">
         </div>
         <button type="submit" class="btn btn-default">Dodaj słowo</button>
     </form>
@@ -23,32 +23,35 @@
 
 <script type="text/javascript">
 angular.module("myapp", [])
-        .controller("WordController", function($scope, $http) {
+.controller("WordController", function($scope, $http) {
 
-            $scope.words = [];
-            $scope.word = '';
+    $scope.words = [];
+    $scope.word = '';
 
-            $scope.loadWords = function() {
-                $http({method: 'GET', url: '/word'})
-                .success(function(data, status, headers, config) {
-                    console.log(data[0]);
-                    $scope.words = data;
-                })
-                .error(function(data, status, headers, config) {
-                    console.log('error');
-                });
-            }
+    this.loadWords = function() {
+        $http({method: 'GET', url: '/word'})
+        .success(function(data, status, headers, config) {
+            console.log(data[0]);
+            $scope.words = data;
+            $scope.nextWord();
+        })
+        .error(function(data, status, headers, config) {
+            console.log('error');
+        });
+    }
 
-            $scope.know = function() {
-                console.log('know');
-                $scope.word = $scope.words[Math.floor(Math.random() * $scope.words.length)].text;
-            }
+    $scope.nextWord = function() {
+        $scope.word = $scope.words[Math.floor(Math.random() * $scope.words.length)].text;
+    }
 
-            $scope.dontKnow = function() {
-                $scope.word = $scope.words[Math.floor(Math.random() * $scope.words.length)].text;
-            }
+    $scope.know = function() {
+        $scope.nextWord();
+    }
 
-            $scope.loadWords();
+    $scope.dontKnow = function() {
+        $scope.nextWord();
+    }
 
-        } );
+    this.loadWords();
+});
 </script>
