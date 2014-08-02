@@ -19,7 +19,7 @@
 	position: absolute;
 	top: 0;
 	left: 60px;
-	background: #1a1a1a;
+	background: #bdc3c7;
 	width: 400px;
 	height: 100%;
 }
@@ -144,3 +144,13 @@
 }
 
 
+.new-word-input {
+	margin-top: 60px;
+	margin-left: 10px;
+	width: 95%;
+}
+
+.new-word-button {
+	margin-left: 10px;
+	width: 95%;
+}

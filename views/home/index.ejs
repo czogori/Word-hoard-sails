@@ -1,32 +1,44 @@
+<div ng-app="myapp" ng-controller="WordController">
 <nav class="menu" id="theMenu">
     <div class="menu-wrap">
     <i class="icon-remove menu-close"></i>
      <form role="form">
         <div class="form-group">
-            <input type="text" class="form-control" id="new-word" placeholder="Nowe słowo">
+            <input ng-model="newWord" type="text" class="form-control new-word-input" id="new-word" placeholder="Nowe słowo">
         </div>
-        <button type="submit" class="btn btn-default">Dodaj słowo</button>
+        <button ng-click="addWord()" class="btn btn-primary form-control new-word-button">Dodaj słowo</button>
     </form>
+<div style="overflow-y: scroll;">
+<ul class="example-animate-container">
+    <li class="animate-repeat" ng-repeat="word in words | orderBy:'created_at':reverse">
+      {{ word.text }}
+    </li>
+    <li class="animate-repeat" ng-if="results.length == 0">
+      <strong>No results found...</strong>
+    </li>
+</ul>
+</div>
     </div>
 
     <!-- Menu button -->
     <div id="menuToggle" class="active"><i class="icon-reorder"></i></div>
 </nav>
 
-<div class="row" ng-app="myapp">
-    <div ng-controller="WordController" class="col-md-2 col-md-offset-5">
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
         <h1>{{ word }}</h1>
         <a ng-click="know()" href="" class="btn btn-default">Wiem</a>
         <a ng-click="dontKnow()" href="" class="btn btn-default">Nie wiem</a>
     </div>
 </div>
-
+</div>
 <script type="text/javascript">
 angular.module("myapp", [])
 .controller("WordController", function($scope, $http) {
 
     $scope.words = [];
     $scope.word = '';
+    $scope.newWord = '';
 
     this.loadWords = function() {
         $http({method: 'GET', url: '/word'})
@@ -50,6 +62,16 @@ angular.module("myapp", [])
 
     $scope.dontKnow = function() {
         $scope.nextWord();
+    }
+
+    $scope.addWord = function() {
+        console.log($scope.newWord);
+        $http({method: 'GET', url: '/word/create', params: {text: $scope.newWord}})
+        .success(function(data, status, headers, config) {
+        })
+        .error(function(data, status, headers, config) {
+            console.log('error');
+        });
     }
 
     this.loadWords();
