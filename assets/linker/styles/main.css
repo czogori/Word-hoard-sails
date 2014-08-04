@@ -143,6 +143,14 @@
 			transition: all .1s ease-in-out;
 }
 
+.main {
+	text-align: center;
+}
+
+.main-word {
+	font-size: 98px;
+	text-decoration: none !important;
+}
 
 .new-word-input {
 	margin-top: 60px;
