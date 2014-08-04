@@ -10,11 +10,11 @@
     </form>
 <div>
 <ul class="example-animate-container">
-    <li class="animate-repeat" ng-repeat="word in words | orderBy:'created_at':reverse">
+    <li class="animate-repeat" ng-repeat="word in words | orderBy:'-createdAt'">
       {{ word.text }}
     </li>
     <li class="animate-repeat" ng-if="results.length == 0">
-      <strong>No results found...</strong>
+      <strong>Brak słów</strong>
     </li>
 </ul>
 </div>
@@ -27,52 +27,7 @@
 <div class="main">
 
         <h1><a href="http://diki.pl/{{ word }}" target="_blank" class="main-word">{{ word }}</a></h1>
-        <a ng-click="know()" href="" class="btn btn-default">Wiem</a>
+        <a ng-click="know()" href="" class="btn btn-success">Wiem</a>
         <a ng-click="dontKnow()" href="" class="btn btn-default">Nie wiem</a>
 </div>
 </div>
-<script type="text/javascript">
-angular.module("myapp", [])
-.controller("WordController", function($scope, $http) {
-
-    $scope.words = [];
-    $scope.word = '';
-    $scope.newWord = '';
-
-    this.loadWords = function() {
-        $http({method: 'GET', url: '/word'})
-        .success(function(data, status, headers, config) {
-            console.log(data[0]);
-            $scope.words = data;
-            $scope.nextWord();
-        })
-        .error(function(data, status, headers, config) {
-            console.log('error');
-        });
-    }
-
-    $scope.nextWord = function() {
-        $scope.word = $scope.words[Math.floor(Math.random() * $scope.words.length)].text;
-    }
-
-    $scope.know = function() {
-        $scope.nextWord();
-    }
-
-    $scope.dontKnow = function() {
-        $scope.nextWord();
-    }
-
-    $scope.addWord = function() {
-        console.log($scope.newWord);
-        $http({method: 'GET', url: '/word/create', params: {text: $scope.newWord}})
-        .success(function(data, status, headers, config) {
-        })
-        .error(function(data, status, headers, config) {
-            console.log('error');
-        });
-    }
-
-    this.loadWords();
-});
-</script>
