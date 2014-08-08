@@ -1,3 +1,3 @@
-Word-hoard
-==========
-Sails and angular playground.
+# test_sails
+
+a [Sails](http://sailsjs.org) application
