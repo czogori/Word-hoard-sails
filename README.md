@@ -1,3 +1,3 @@
-# test_sails
+# Word-hoard
 
-a [Sails](http://sailsjs.org) application
+Playground [Sails](http://sailsjs.org) application.
